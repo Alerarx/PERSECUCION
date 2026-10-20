@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crimen de Persecución | Caso Claudia Julieta Duque vs. DAS</title>
+  <style>
+    :root {
+      --bg-base: #090d16;
+      --bg-surface: #111827;
+      --bg-card: #182234;
+      --bg-card-hover: #1f2d45;
+      --bg-accent: rgba(56, 189, 248, 0.1);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(56, 189, 248, 0.35);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --cyan: #38bdf8;
+      --cyan-glow: rgba(56, 189, 248, 0.4);
+      --crimson: #f43f5e;
+      --crimson-glow: rgba(244, 63, 94, 0.35);
+      --amber: #fbbf24;
+      --emerald: #34d399;
+      --purple: #c084fc;
+      --sidebar-w: 290px;
+      --font-display: 'Georgia', 'Times New Roman', serif;
+      --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'Consolas', 'Monaco', monospace;
+      --shadow-lg: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+      --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    [data-theme="light"] {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #f1f5f9;
+      --bg-card-hover: #e2e8f0;
+      --bg-accent: rgba(2, 132, 199, 0.08);
+      --border: #e2e8f0;
+      --border-accent: rgba(2, 132, 199, 0.4);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #94a3b8;
+      --cyan: #0284c7;
+      --cyan-glow: rgba(2, 132, 199, 0.2);
+      --crimson: #e11d48;
+      --crimson-glow: rgba(225, 29, 72, 0.2);
+      --amber: #d97706;
+      --emerald: #059669;
+      --purple: #9333ea;
+      --shadow-lg: 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-ui);
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.55;
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-size: 15px;
+    }
+
+    /* Top Progress */
+    #top-progress {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: rgba(255,255,255,0.05);
+      z-index: 1000;
+    }
+    #top-progress-fill {
+      height: 100%; width: 7.7%;
+      background: linear-gradient(90deg, var(--cyan), var(--crimson));
+      transition: width 0.25s ease;
+    }
+
+    /* Sidebar Navigation */
+    aside.sidebar {
+      width: var(--sidebar-w);
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 4px; bottom: 0; left: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 900;
+      transition: transform 0.3s ease;
+    }
+    .sidebar-head {
+      padding: 1.1rem 1rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.15);
+    }
+    .kicker {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .kicker::before {
+      content: "";
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--crimson);
+      box-shadow: 0 0 8px var(--crimson);
+    }
+    .sidebar-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 0.35rem;
+      line-height: 1.3;
+    }
+    .sidebar-menu {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.6rem 0.5rem;
+    }
+    .nav-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.52rem 0.7rem;
+      margin-bottom: 0.2rem;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.81rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.18s ease;
+    }
+    .nav-btn:hover {
+      background: var(--bg-card);
+      color: var(--text-main);
+    }
+    .nav-btn.active {
+      background: var(--bg-accent);
+      color: var(--cyan);
+      border-color: var(--border-accent);
+      font-weight: 600;
+    }
+    .nav-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      flex-shrink: 0;
+    }
+    .nav-btn.active .nav-num {
+      background: var(--cyan);
+      color: #090d16;
+      font-weight: 700;
+    }
+    .sidebar-foot {
+      padding: 0.8rem 1rem;
+      border-top: 1px solid var(--border);
+      background: rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .pdf-download-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.15), rgba(244, 63, 94, 0.05));
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      padding: 0.45rem 0.6rem;
+      border-radius: 6px;
+      color: #fecdd3;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .pdf-download-link:hover {
+      background: rgba(244, 63, 94, 0.25);
+      border-color: var(--crimson);
+      color: #fff;
+    }
+
+    /* Main Container */
+    .main-wrap {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    header.top-bar {
+      position: sticky;
+      top: 4px;
+      z-index: 800;
+      background: var(--bg-surface);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .menu-toggle {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 0.4rem 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .active-sec-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-pill:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+    .btn-pill.primary {
+      background: var(--cyan);
+      color: #090d16;
+      border-color: var(--cyan);
+    }
+    .btn-pill.primary:hover {
+      background: #7dd3fc;
+      color: #090d16;
+    }
+
+    /* Content Area */
+    main.view-area {
+      max-width: 1240px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 2.2rem 4rem;
+    }
+    .section-view {
+      display: none;
+      animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .section-view.active {
+      display: block;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Headers */
+    .sec-top {
+      margin-bottom: 1.8rem;
+    }
+    .sec-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 0.4rem;
+    }
+    .sec-headline {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+    .sec-sub {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      max-width: 920px;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-probado { background: rgba(52, 211, 153, 0.15); color: var(--emerald); border: 1px solid rgba(52, 211, 153, 0.3); }
+    .badge-judicial { background: rgba(56, 189, 248, 0.15); color: var(--cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-crimson { background: rgba(244, 63, 94, 0.15); color: var(--crimson); border: 1px solid rgba(244, 63, 94, 0.3); }
+    .badge-amber { background: rgba(251, 191, 36, 0.15); color: var(--amber); border: 1px solid rgba(251, 191, 36, 0.3); }
+    .badge-purple { background: rgba(192, 132, 252, 0.15); color: var(--purple); border: 1px solid rgba(192, 132, 252, 0.3); }
+
+    /* Cards & Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.4rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow-card);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card-p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    /* Images & Galleries */
+    .img-frame {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #000;
+      cursor: pointer;
+    }
+    .img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .img-frame:hover img {
+      transform: scale(1.04);
+      filter: brightness(1.08);
+    }
+    .img-overlay-btn {
+      position: absolute;
+      bottom: 8px; right: 8px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.55rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      opacity: 0.9;
+    }
+    .img-caption {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 0.4rem;
+      line-height: 1.35;
+    }
+
+    /* Timeline Scrubber */
+    .scrubber-bar {
+      display: flex;
+      overflow-x: auto;
+      gap: 0.5rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+    .scrub-btn {
+      flex: 0 0 auto;
+      padding: 0.45rem 0.9rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.15s ease;
+    }
+    .scrub-btn:hover {
+      border-color: var(--cyan);
+      color: var(--text-main);
+    }
+    .scrub-btn.active {
+      background: var(--cyan);
+      color: #090d16;
+      border-color: var(--cyan);
+      font-weight: 700;
+      box-shadow: 0 0 12px var(--cyan-glow);
+    }
+
+    /* Interactive Terminal Simulator */
+    .terminal-box {
+      background: #050811;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+      font-family: var(--font-mono);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+    }
+    .terminal-bar {
+      background: #0f172a;
+      padding: 0.5rem 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1e293b;
+    }
+    .term-dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+    .term-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .term-body {
+      padding: 1.2rem;
+      color: #e2e8f0;
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    /* Interactive Org Tree */
+    .org-node {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .org-node:hover {
+      border-color: var(--cyan);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+    .org-node.danger:hover {
+      border-color: var(--crimson);
+    }
+
+    /* Filter Pills */
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .filter-chip {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-chip:hover, .filter-chip.active {
+      background: var(--bg-accent);
+      color: var(--cyan);
+      border-color: var(--cyan);
+    }
+
+    /* Lightbox Modal */
+    #lightbox-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    #lightbox-modal.open {
+      display: flex;
+    }
+    .lightbox-content {
+      max-width: 1050px;
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+      max-height: 90vh;
+    }
+    .lightbox-header {
+      padding: 0.8rem 1.2rem;
+      background: rgba(0,0,0,0.3);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .lightbox-img-wrap {
+      padding: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #030712;
+      overflow: auto;
+      flex: 1;
+    }
+    .lightbox-img-wrap img {
+      max-height: 65vh;
+      max-width: 100%;
+      object-fit: contain;
+      border-radius: 4px;
+      transition: transform 0.2s ease;
+    }
+    .lightbox-meta {
+      padding: 0.8rem 1.2rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-surface);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Actor Modal / Drawer */
+    #actor-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(6px);
+      z-index: 2100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    #actor-modal.open {
+      display: flex;
+    }
+    .actor-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-width: 650px;
+      width: 100%;
+      padding: 1.6rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      aside.sidebar { transform: translateX(-100%); }
+      aside.sidebar.open { transform: translateX(0); }
+      .main-wrap { margin-left: 0; }
+      .menu-toggle { display: inline-flex; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      main.view-area { padding: 1.5rem 1rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Progress Bar -->
+  <div id="top-progress"><div id="top-progress-fill"></div></div>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div style="display:flex; align-items:center; gap:0.65rem; margin-bottom:0.35rem;">
+        <img src="assets/icc_cpi_logo.svg" alt="Corte Penal Internacional" style="height:26px; width:auto; flex-shrink:0; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.4));" />
+        <div class="kicker">Derecho Penal Internacional</div>
+      </div>
+      <div class="sidebar-title">Caso Claudia Julieta Duque vs. DAS</div>
+    </div>
+    <nav class="sidebar-menu">
+      <button class="nav-btn active" onclick="showSec(1)"><span class="nav-num">01</span><span>Portada y Problema</span></button>
+      <button class="nav-btn" onclick="showSec(2)"><span class="nav-num">02</span><span>Contexto y Perfil</span></button>
+      <button class="nav-btn" onclick="showSec(3)"><span class="nav-num">03</span><span>Cronología (1999–2022)</span></button>
+      <button class="nav-btn" onclick="showSec(4)"><span class="nav-num">04</span><span>Lesa Humanidad (Art. 7)</span></button>
+      <button class="nav-btn" onclick="showSec(5)"><span class="nav-num">05</span><span>Crimen de Persecución</span></button>
+      <button class="nav-btn" onclick="showSec(6)"><span class="nav-num">06</span><span>Reconstrucción del Asedio</span></button>
+      <button class="nav-btn" onclick="showSec(7)"><span class="nav-num">07</span><span>Organigrama DAS & G-3</span></button>
+      <button class="nav-btn" onclick="showSec(8)"><span class="nav-num">08</span><span>Matriz y Calculadora DPI</span></button>
+      <button class="nav-btn" onclick="showSec(9)"><span class="nav-num">09</span><span>Decisiones Judiciales</span></button>
+      <button class="nav-btn" onclick="showSec(10)"><span class="nav-num">10</span><span>Límites y Archivos</span></button>
+      <button class="nav-btn" onclick="showSec(11)"><span class="nav-num">11</span><span>Conclusiones DPI</span></button>
+      <button class="nav-btn" onclick="showSec(12)"><span class="nav-num">12</span><span>Galería y Documentos</span></button>
+      <button class="nav-btn" onclick="showSec(13)"><span class="nav-num">13</span><span>Simulador DPI (Quiz)</span></button>
+    </nav>
+  </aside>
+
+  <!-- Main View Wrap -->
+  <div class="main-wrap">
+    <header class="top-bar">
+      <div class="top-left">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰ Menú</button>
+        <span class="active-sec-title" id="bar-title">01 · Portada y Problema Jurídico</span>
+      </div>
+      <div class="top-actions">
+        <button class="btn-pill" onclick="openLightbox('assets/foto_corte_o_protesta.png')">📸 Foto Principal</button>
+        <button class="btn-pill" onclick="toggleTheme()">🌓 Tema</button>
+        <button class="btn-pill primary" onclick="showSec(13)">🎯 Test DPI</button>
+      </div>
+    </header>
+
+    <main class="view-area">
+
+      <!-- ==================== SECCIÓN 1: PORTADA ==================== -->
+      <section class="section-view active" id="sec-1">
+        <div class="card" style="padding:0; overflow:hidden; border-color:var(--border-accent); margin-bottom:1.5rem;">
+          <div style="position:relative; min-height:360px; display:flex; align-items:flex-end; background:#000;">
+            <img src="assets/foto_corte_o_protesta.png" alt="Claudia Julieta Duque en Audiencia Pública" style="position:absolute; width:100%; height:100%; object-fit:cover; opacity:0.38;" />
+            <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(9,13,22,1) 15%, rgba(9,13,22,0.6) 60%, rgba(9,13,22,0.2) 100%);"></div>
+            
+            <div style="position:relative; z-index:2; padding:2rem; width:100%;">
+              <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.75rem; flex-wrap:wrap;">
+                <div style="display:flex; align-items:center; gap:0.4rem; background:rgba(255,255,255,0.08); padding:4px 8px; border-radius:6px; border:1px solid rgba(255,255,255,0.2);">
+                  <img src="assets/icc_cpi_logo.svg" alt="Corte Penal Internacional" style="height:30px; width:auto;" />
+                  <span style="font-size:0.75rem; font-weight:700; color:#93c5fd; letter-spacing:0.04em;">CPI / ICC</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:0.4rem; background:rgba(255,255,255,0.08); padding:4px 8px; border-radius:6px; border:1px solid rgba(255,255,255,0.2);">
+                  <img src="assets/das_logo_oficial.svg" alt="DAS Logo" style="height:30px; width:auto;" />
+                  <span style="font-size:0.75rem; font-weight:700; color:#fca5a5; letter-spacing:0.04em;">DAS</span>
+                </div>
+                <span class="badge badge-judicial">Estatuto de Roma Art. 7(1)(h)</span>
+                <span class="badge badge-crimson">Aparato Criminal de Estado</span>
+                <span class="badge badge-probado">Consejo de Estado Rad. 66.603</span>
+              </div>
+              <h1 style="font-family:var(--font-display); font-size:2.5rem; font-weight:700; line-height:1.15; max-width:850px; text-shadow:0 2px 10px rgba(0,0,0,0.8);">
+                El Crimen de Lesa Humanidad de Persecución
+              </h1>
+              <p style="color:var(--cyan); font-size:1.15rem; font-weight:600; margin-top:0.35rem; text-shadow:0 1px 4px rgba(0,0,0,0.8);">
+                Reconstrucción Dogmática y Fáctica del Caso Claudia Julieta Duque vs. DAS (1999–2022)
+              </p>
+            </div>
+          </div>
+
+          <div style="padding:1.4rem 2rem; background:var(--bg-surface); border-top:1px solid var(--border); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem;">
+            <div style="display:flex; gap:1.5rem; flex-wrap:wrap;">
+              <div><span style="font-size:0.72rem; text-transform:uppercase; color:var(--text-dim); display:block;">Víctima</span><strong style="color:var(--text-main); font-size:0.9rem;">Claudia Julieta Duque Orrego</strong></div>
+              <div><span style="font-size:0.72rem; text-transform:uppercase; color:var(--text-dim); display:block;">Perpetrador</span><strong style="color:var(--crimson); font-size:0.9rem;">DAS · Grupo G-3 Clandestino</strong></div>
+              <div><span style="font-size:0.72rem; text-transform:uppercase; color:var(--text-dim); display:block;">Calificación Jurídica</span><strong style="color:var(--cyan); font-size:0.9rem;">Art. 7(1)(h) Estatuto de Roma</strong></div>
+              <div><span style="font-size:0.72rem; text-transform:uppercase; color:var(--text-dim); display:block;">Tipificación Nacional</span><strong style="color:var(--amber); font-size:0.9rem;">Tortura Psicológica Agravada</strong></div>
+            </div>
+            <div style="display:flex; gap:0.5rem;">
+              <button class="btn-pill" onclick="showSec(2)">Iniciar Recorrido →</button>
+              <button class="btn-pill primary" onclick="showSec(12)">Ver Galería Probatoria</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-4" style="margin-bottom:1.5rem;">
+          <div class="card" style="text-align:center;">
+            <div style="font-family:var(--font-mono); font-size:1.8rem; font-weight:700; color:var(--cyan);">23+</div>
+            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">Años de Asedio y Litigio</div>
+          </div>
+          <div class="card" style="text-align:center;">
+            <div style="font-family:var(--font-mono); font-size:1.8rem; font-weight:700; color:var(--crimson);">3</div>
+            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">Exilios Forzados (2001, 2004, 2008)</div>
+          </div>
+          <div class="card" style="text-align:center;">
+            <div style="font-family:var(--font-mono); font-size:1.8rem; font-weight:700; color:var(--amber);">99.8%</div>
+            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">Archivos Borrados (54 GB a 91 MB)</div>
+          </div>
+          <div class="card" style="text-align:center;">
+            <div style="font-family:var(--font-mono); font-size:1.8rem; font-weight:700; color:var(--emerald);">70%</div>
+            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">Condena Estatal al DAS</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">⚖️ Formulación del Problema Jurídico Central</div>
+          <p class="card-p" style="font-size:0.95rem;">
+            ¿Puede una campaña prolongada de hostigamiento, amenazas de muerte contra una menor de edad, interceptación ilegal y guerra psicológica desplegada por un organismo estatal de inteligencia contra una periodista independiente subsumirse en el crimen de lesa humanidad de <strong>persecución</strong> (Art. 7.1.h Estatuto de Roma), aun cuando el ordenamiento interno colombiano haya procesado las conductas bajo el tipo penal de <strong>tortura psicológica agravada</strong> y concierto para delinquir?
+          </p>
+        </div>
+      </section>
+
+      <!-- ==================== SECCIÓN 2: CONTEXTO Y PERFIL ==================== -->
+      <section class="section-view" id="sec-2">
+        <div class="sec-top">
+          <div class="sec-tag">Capítulo 02 · Contexto Fáctico e Institucional</div>
+          <h2 class="sec-headline">Claudia Julieta Duque y el Aparato de Inteligencia</h2>
+          <p class="sec-sub">El choque entre el periodismo de investigación sobre el magnicidio de Jaime Garzón y la doctrina contrainsurgente del extinto DAS.</p>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:1.5rem;">
+          <div class="card">
+            <div style="display:flex; gap:1rem; margin-bottom:1rem; align-items:flex-start;">
+              <div style="width:110px; height:120px; flex-shrink:0;" class="img-frame" onclick="openLightbox('assets/claudia_duque_color.png')">
+                <img src="assets/claudia_duque_color.png" alt="Claudia Julieta Duque" />
+                <div class="img-overlay-btn">🔍</div>
+              </div>
+              <div>
+                <span class="badge badge-judicial">Periodista y Defensora</span>
+                <h3 style="font-size:1.15rem; font-weight:700; margin-top:0.3rem;">Claudia Julieta Duque Orrego</h3>
+                <p style="font-size:0.84rem; color:var(--text-muted); margin-top:0.2rem;">
+                  Investigadora de Radio Nizkor y defensora de derechos humanos. Descubrió que el DAS desvió el expediente de Jaime Garzón sembrando testigos falsos.
+                </p>
+              </div>
+            </div>
+            <div class="card-p">
+              En 2001, tras denunciar el montaje orquestado por detectives del DAS en el caso Garzón, fue secuestrada mediante el modus operandi de "paseo millonario", iniciándose un asedio de más de dos décadas.
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display:flex; gap:1rem; margin-bottom:1rem; align-items:flex-start;">
+              <div style="width:110px; height:120px; flex-shrink:0;" class="img-frame" onclick="openLightbox('assets/das_edificio_o_agentes.jpg')">
+                <img src="assets/das_edificio_o_agentes.jpg" alt="Edificio Central del DAS Paloquemao" />
+                <div class="img-overlay-btn">🔍</div>
+              </div>
+              <div>
+                <span class="badge badge-crimson">Aparato de Estado</span>
+                <h3 style="font-size:1.15rem; font-weight:700; margin-top:0.3rem;">Departamento Administrativo de Seguridad (DAS)</h3>
+                <p style="font-size:0.84rem; color:var(--text-muted); margin-top:0.2rem;">
+                  Organismo de inteligencia adscrito a la Presidencia de la República. Creó la estructura clandestina "Grupo G-3" para neutralizar a la oposición y prensa crítica.
+                </p>
+              </div>
+            </div>
+            <div class="card-p">
+              Disuelto por el Decreto 4057 de 2011 tras comprobarse el espionaje masivo y la tortura psicológica dirigida contra magistrados, periodistas y líderes sociales.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🎯 Los 3 Hallazgos Periodísticos que Detonaron la Furia Estatal</div>
+          <div class="grid-3" style="margin-top:0.8rem;">
+            <div style="background:var(--bg-surface); padding:0.9rem; border-radius:8px; border:1px solid var(--border);">
+              <div style="font-weight:700; color:var(--cyan); font-size:0.85rem;">1. Desviación Caso Garzón</div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.3rem;">Demostró que agentes del DAS y Carlos Castaño coordinaron el asesinato y sembraron al falso testigo "Mariachi".</div>
+            </div>
+            <div style="background:var(--bg-surface); padding:0.9rem; border-radius:8px; border:1px solid var(--border);">
+              <div style="font-weight:700; color:var(--amber); font-size:0.85rem;">2. Narcotráfico e Infiltración</div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.3rem;">Publicó nexos entre la alta cúpula del DAS (Jorge Noguera) y las autodefensas del Bloque Norte de 'Jorge 40'.</div>
+            </div>
+            <div style="background:var(--bg-surface); padding:0.9rem; border-radius:8px; border:1px solid var(--border);">
+              <div style="font-weight:700; color:var(--crimson); font-size:0.85rem;">3. Desclasificación de Archivos</div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.3rem;">Obtuvo la histórica Sentencia T-1037/08 de la Corte Constitucional ordenando abrir los expedientes de inteligencia.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECCIÓN 3: CRONOLOGÍA ==================== -->
+      <section class="section-view" id="sec-3">
+        <div class="sec-top">
+          <div class="sec-tag">Capítulo 03 · Línea Temporal Interactiva</div>
+          <h2 class="sec-headline">Evolución de los Hechos (1999 – 2022)</h2>
+          <p class="sec-sub">Selecciona un año en la barra para explorar los acontecimientos, piezas probatorias facsimilares y decisiones judiciales.</p>
+        </div>
+
+        <div class="scrubber-bar">
+          <button class="scrub-btn active" onclick="loadYear(1999, this)">1999 · Asesinato Garzón</button>
+          <button class="scrub-btn" onclick="loadYear(2001, this)">2001 · Secuestro / Exilio</button>
+          <button class="scrub-btn" onclick="loadYear(2003, this)">2003 · Memorando DAS</button>
+          <button class="scrub-btn" onclick="loadYear(2004, this)">2004 · Manual Amenaza Hija</button>
+          <button class="scrub-btn" onclick="loadYear(2006, this)">2006 · Misión 0904</button>
+          <button class="scrub-btn" onclick="loadYear(2007, this)">2007 · Retiro Blindado</button>
+          <button class="scrub-btn" onclick="loadYear(2008, this)">2008 · Sentencia T-1037</button>
+          <button class="scrub-btn" onclick="loadYear(2009, this)">2009 · Hallazgo AZs G-3</button>
+          <button class="scrub-btn" onclick="loadYear(2010, this)">2010 · Confesión Duarte</button>
+          <button class="scrub-btn" onclick="loadYear(2011, this)">2011 · Estambul / Disolución</button>
+          <button class="scrub-btn" onclick="loadYear(2014, this)">2014 · Sentencia Ortiz</button>
+          <button class="scrub-btn" onclick="loadYear(2017, this)">2017 · Lesa Humanidad</button>
+          <button class="scrub-btn" onclick="loadYear(2022, this)">2022 · Fallo Consejo Estado</button>
+        </div>
+
+        <div class="card" id="year-display" style="border-color:var(--border-accent); min-height:220px;">
+          <!-- Loaded dynamically -->
+        </div>
+      </section>
+
+      <!-- ==================== SECCIÓN 4: CONCEPTO DE LESA HUMANIDAD ==================== -->
+      <section class="section-view" id="sec-4">
+        <div class="sec-top">
+          <div class="sec-tag">Capítulo 04 · Marco Dogmático Internacional</div>
+          <h2 class="sec-headline">Los Elementos del Chapeau (Art. 7 Estatuto de Roma)</h2>
+          <p class="sec-sub">Para que un acto trascienda el delito común y adquiera la gravedad de crimen de lesa humanidad, debe cumplir con los requisitos umbral del Chapeau.</p>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:1.5rem;">
+          <div class="card">
+            <div class="card-title" style="justify-content:space-between;">
+              <span>🏛️ Evolución Histórica: De Nuremberg al Estatuto de Roma</span>
+              <img src="assets/icc_cpi_logo.svg" alt="CPI" style="height:26px; width:auto; opacity:0.9;" />
+            </div>
+            <div style="width:100%; height:160px; margin-bottom:0.8rem;" class="img-frame" onclick="openLightbox('assets/img_conflicto_lesa_humanidad.jpg')">
+              <img src="assets/img_conflicto_lesa_humanidad.jpg" alt="Ataques Sistemáticos contra Civiles" />
+              <div class="img-overlay-btn">🔍 Contexto Internacional</div>
+            </div>
+            <p class="card-p">
+              El concepto nació en el Estatuto de Nuremberg (1945) condicionado a la existencia de guerra. Con los tribunales <em>ad hoc</em> para Ruanda (TPIR) y la antigua Yugoslavia (TPIY), y definitivamente en el Art. 7 del Estatuto de Roma (1998), se consolidó como una categoría <strong>autónoma en tiempos de paz o de conflicto</strong>.
+            </p>
+          </div>
+
+          <!-- Validador Interactivo del Chapeau -->
+          <div class="card" style="border-color:var(--border-accent);">
+            <div class="card-title">⚙️ Validador Interactivo del Umbral de Lesa Humanidad</div>
+            <p class="card-p" style="font-size:0.82rem; margin-bottom:0.8rem;">
+              Haz clic en cada pilar para comprobar si los hechos del caso Duque satisfacen las exigencias del Art. 7:
+            </p>
+            <div style="display:flex; flex-direction:column; gap:0.5rem;" id="chapeau-validator">
+              <button class="nav-btn" style="border:1px solid var(--border);" onclick="toggleChapeau(1, this)">
+                <span class="nav-num" id="chk-1">✓</span>
+                <span><strong>Ataque Generalizado o Sistemático:</strong> Operaciones coordinadas y reiteradas.</span>
+              </button>
+              <button class="nav-btn" style="border:1px solid var(--border);" onclick="toggleChapeau(2, this)">
+                <span class="nav-num" id="chk-2">✓</span>
+                <span><strong>Contra Población Civil:</strong> Periodistas, magistrados y defensores.</span>
+              </button>
+              <button class="nav-btn" style="border:1px solid var(--border);" onclick="toggleChapeau(3, this)">
+                <span class="nav-num" id="chk-3">✓</span>
+                <span><strong>Conforme a Política de Estado:</strong> Recursos reservados, memorandos y directivas.</span>
+              </button>
+              <button class="nav-btn" style="border:1px solid var(--border);" onclick="toggleChapeau(4, this)">
+                <span class="nav-num" id="chk-4">✓</span>
+                <span><strong>Conocimiento del Ataque (Mens Rea):</strong> Consciencia del plan global.</span>
+              </button>
+            </div>
+            <div id="chapeau-verdict" style="margin-top:0.8rem; padding:0.6rem; border-radius:6px; background:rgba(52,211,153,0.15); border:1px solid rgba(52,211,153,0.3); color:var(--emerald); font-size:0.82rem; font-weight:600; text-align:center;">
+              ✓ Umbral Superado: Califica como Crimen de Lesa Humanidad (Ius Cogens)
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📌 Distinción Crucial: Delito Común vs. Crimen de Lesa Humanidad</div>
+          <div class="grid-3" style="margin-top:0.6rem;">
+            <div style="background:var(--bg-surface); padding:0.9rem; border-radius:8px;">
+              <strong style="color:var(--text-main);">Bien Jurídico:</strong>
+              <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.2rem;">En el delito común se lesiona a la persona individual; en lesa humanidad se lesiona a la humanidad entera en su dignidad colectiva.</p>
+            </div>
+            <div style="background:var(--bg-surface); padding:0.9rem; border-radius:8px;">
+              <strong style="color:var(--text-main);">Prescripción:</strong>
+              <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.2rem;">Los crímenes comunes prescriben con el tiempo. Los crímenes de lesa humanidad son <strong>imprescriptibles e inamnistiables</strong>.</p>
+            </div>
+            <div style="background:var(--bg-surface); padding:0.9rem; border-radius:8px;">
+              <strong style="color:var(--text-main);">Contexto Organizacional:</strong>
+              <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.2rem;">Exige que el autor actúe amparado por un aparato organizado de poder o ejecute una política institucional.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECCIÓN 5: CRIMEN DE PERSECUCIÓN ==================== -->
+      <section class="section-view" id="sec-5">
+        <div class="sec-top">
+          <div class="sec-tag">Capítulo 05 · Art. 7(1)(h) Estatuto de Roma</div>
+          <h2 class="sec-headline">Desarrollo Específico del Crimen de Persecución</h2>
+          <p class="sec-sub">La privación intencional y grave de derechos fundamentales por motivos discriminatorios y su conexión con otros actos inhumanos.</p>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:1.5rem;">
+          <div class="card">
+            <div class="card-title">📖 Definición Normativa (Art. 7.2.g)</div>
+            <p class="card-p" style="font-size:0.92rem; font-style:italic; border-left:3px solid var(--cyan); padding-left:0.8rem; margin-bottom:0.8rem;">
+              "Por 'persecución' se entenderá la privación intencional y grave de derechos fundamentales en violación del derecho internacional en razón de la identidad del grupo o de la colectividad."
+            </p>
+            <div style="display:flex; gap:0.6rem; align-items:center;">
+              <img src="assets/img_periodistas_silenciados.jpg" alt="Ataques a Periodistas" style="width:100px; height:75px; object-fit:cover; border-radius:6px; cursor:pointer;" onclick="openLightbox('assets/img_periodistas_silenciados.jpg')" />
+              <div style="font-size:0.8rem; color:var(--text-muted);">
+                La jurisprudencia del TPIY (<em>Kupreskic</em> y <em>Kordic</em>) fijó que la persecución no exige la muerte física, sino la supresión sistemática del ejercicio de derechos básicos por odio o intolerancia política.
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">⚖️ Los 4 Requisitos Dogmáticos Especiales</div>
+            <div style="display:flex; flex-direction:column; gap:0.45rem;">
+              <div style="font-size:0.82rem; background:var(--bg-surface); padding:0.5rem 0.8rem; border-radius:6px;">
+                <strong style="color:var(--cyan);">1. Gravedad Extrema:</strong> Debe alcanzar la misma gravedad que los demás actos del Art. 7 (violación al núcleo esencial).
+              </div>
+              <div style="font-size:0.82rem; background:var(--bg-surface); padding:0.5rem 0.8rem; border-radius:6px;">
+                <strong style="color:var(--amber);">2. Colectividad Identificable:</strong> Periodistas de investigación y opositores políticos clasificados como "blancos legítimos".
+              </div>
+              <div style="font-size:0.82rem; background:var(--bg-surface); padding:0.5rem 0.8rem; border-radius:6px;">
+                <strong style="color:var(--crimson);">3. Motivo Político / Discriminatorio:</strong> Intolerancia frente a la línea editorial y denuncias periodísticas.
+              </div>
+              <div style="font-size:0.82rem; background:var(--bg-surface); padding:0.5rem 0.8rem; border-radius:6px;">
+                <strong style="color:var(--purple);">4. Cláusula de Conexión:</strong> Vinculada a tortura (7.1.f) y otros actos inhumanos (7.1.k).
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparador Interactivo de Figuras Penales -->
+        <div class="card">
+          <div class="card-title">🔍 Comparador Interactivo de Figuras Penales</div>
+          <div style="display:flex; gap:0.5rem; margin-bottom:1rem; border-bottom:1px solid var(--border); padding-bottom:0.5rem;">
+            <button class="filter-chip active" onclick="switchPenal('persecucion', this)">Persecución (DPI)</button>
+            <button class="filter-chip" onclick="switchPenal('tortura', this)">Tortura Psicológica (CP 178)</button>
+            <button class="filter-chip" onclick="switchPenal('amenazas', this)">Amenazas Comunes (CP 347)</button>
+            <button class="filter-chip" onclick="switchPenal('desplazamiento', this)">Desplazamiento Forzado (CP 180)</button>
+          </div>
+          <div id="penal-content" style="font-size:0.88rem; color:var(--text-muted); line-height:1.6;">
+            <!-- Loaded by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECCIÓN 6: RECONSTRUCCIÓN DEL ASEDIO ==================== -->
+      <section class="section-view" id="sec-6">
+        <div class="sec-top">
+          <div class="sec-tag">Capítulo 06 · Reconstrucción Fáctica</div>
+          <h2 class="sec-headline">El Asedio en 5 Fases Operacionales</h2>
+          <p class="sec-sub">Despliegue escalonado de operaciones psicológicas encubiertas ejecutadas por el DAS contra Claudia Julieta Duque.</p>
+        </div>
+
+        <div class="grid-3" style="margin-bottom:1.5rem;">
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="badge badge-crimson">Fase 1 (2001-2003)</span>
+              <span style="font-size:0.75rem; color:var(--text-dim);">Inicio</span>
+            </div>
+            <h4 style="margin:0.5rem 0 0.3rem; font-size:0.95rem;">Interceptación y Secuestro</h4>
+            <p class="card-p">Seguimientos directos en taxis de inteligencia y secuestro express en Bogotá advirtiéndole no seguir en el caso Jaime Garzón.</p>
+          </div>
+
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="badge badge-crimson">Fase 2 (2003-2004)</span>
+              <span style="font-size:0.75rem; color:var(--text-dim);">Guerra Psíquica</span>
+            </div>
+            <h4 style="margin:0.5rem 0 0.3rem; font-size:0.95rem;">G-3 y Amenazas Letales</h4>
+            <p class="card-p">Creación del Grupo G-3. Redacción del instructivo manuscrito del 17 de noviembre de 2004 para aterrorizarla amenazando con torturar a su hija.</p>
+          </div>
+
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="badge badge-crimson">Fase 3 (2005-2008)</span>
+              <span style="font-size:0.75rem; color:var(--text-dim);">Cerco Institucional</span>
+            </div>
+            <h4 style="margin:0.5rem 0 0.3rem; font-size:0.95rem;">Infiltración y Retiro de Protección</h4>
+            <p class="card-p">Misión 0904: el conductor de su esquema pasa reportes diarios al DAS. Retiro arbitrario de su camioneta blindada por el MinInterior.</p>
+          </div>
+        </div>
+
+        <!-- Terminal Forense Interactivo del Manual del 17-Nov-2004 -->
+        <div class="terminal-box" style="margin-bottom:1.5rem;">
+          <div class="terminal-bar">
+            <div class="term-dots">
+              <div class="term-dot" style="background:#ef4444;"></div>
+              <div class="term-dot" style="background:#f59e0b;"></div>
+              <div class="term-dot" style="background:#10b981;"></div>
+            </div>
+            <div style="font-size:0.75rem; color:#94a3b8;">DISCO DURO G-3 · INSTRUCTIVO TELEFÓNICO RECUPERADO (DOC-01 p. 43)</div>
+            <button class="btn-pill" style="font-size:0.7rem; padding:0.2rem 0.5rem;" onclick="openLightbox('assets/doc01_manual_17nov2004_p43.png')">Ver Original</button>
+          </div>
+          <div class="term-body">
+            <div style="color:#f43f5e; font-weight:700; margin-bottom:0.4rem;">[TRANSCRIPCIÓN FORENSE DEL MANUAL MANUSCRITO - 17 NOVIEMBRE 2004, 7:50 PM]</div>
+            <p style="color:#cbd5e1; font-style:italic; line-height:1.7;">
+              "Dígale a Claudia que hágale un favor a la hija, que no la exponga... que sabemos a qué colegio va, que sabemos cuándo sale... que vamos a quemarla viva, que le vamos a cortar los dedos y se los vamos a mandar en una bolsa si sigue metiéndose en lo que no le importa..."
+            </p>
+            <div style="margin-top:0.8rem; padding-top:0.6rem; border-top:1px dashed #334155; display:flex; gap:1.2rem; flex-wrap:wrap; font-size:0.75rem; color:#94a3b8;">
+              <div>⚡ <strong>Objetivo Táctico:</strong> Terror vicario y aniquilación moral</div>
+              <div>📑 <strong>Prueba Trasladada:</strong> Rad. 66.603 Consejo de Estado</div>
+              <div>🩺 <strong>Protocolo de Estambul:</strong> TEPT crónico certificado</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECCIÓN 7: ORGANIGRAMA DAS Y G-3 ==================== -->
+      <section class="section-view" id="sec-7">
+        <div class="sec-top">
+          <div class="sec-tag">Capítulo 07 · Autoría Mediata y Contexto Organizacional</div>
+          <h2 class="sec-headline">Estructura Jerárquica del DAS y el Grupo G-3</h2>
+          <p class="sec-sub">Haz clic en cualquier mando o agente para inspeccionar su grado de responsabilidad penal y estado procesal actual.</p>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:1rem; margin-bottom:1.5rem;">
+          <!-- Nivel 1: Presidencia -->
+          <div style="text-align:center;">
+            <div class="org-node" style="max-width:380px; margin:0 auto; background:rgba(255,255,255,0.03);" onclick="showActor('presidencia')">
+              <span class="badge badge-purple">Nivel Político Central</span>
+              <div style="font-weight:700; font-size:0.95rem; margin-top:0.3rem;">Presidencia de la República (2002–2010)</div>
+              <div style="font-size:0.75rem; color:var(--text-dim);">Entidad nominadora · Destinataria de reportes de inteligencia</div>
+            </div>
+          </div>
+
+          <div style="text-align:center; color:var(--text-dim); font-size:1.2rem;">↓</div>
+
+          <!-- Nivel 2: Directores Generales -->
+          <div class="grid-3">
+            <div class="org-node danger" onclick="showActor('noguera')">
+              <span class="badge badge-crimson">Director DAS (2002-2005)</span>
+              <div style="font-weight:700; margin-top:0.3rem;">Jorge Aurelio Noguera Cotes</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Condenado por homicidio e infiltración paramilitar. Inhabilitado 20 años por PGN.</div>
+            </div>
+            <div class="org-node" onclick="showActor('hurtado')">
+              <span class="badge badge-crimson">Directora DAS (2007-2008)</span>
+              <div style="font-weight:700; margin-top:0.3rem;">María del Pilar Hurtado</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Condenada por concierto e interceptación ilegal. Asilo revocado en Panamá.</div>
+            </div>
+            <div class="org-node" onclick="showActor('narvaez')">
+              <span class="badge badge-crimson">Subdirector e Ideólogo</span>
+              <div style="font-weight:700; margin-top:0.3rem;">José Miguel Narváez Martínez</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Instigador del asesinato de Jaime Garzón y tortura agravada contra Claudia Duque.</div>
+            </div>
+          </div>
+
+          <div style="text-align:center; color:var(--text-dim); font-size:1.2rem;">↓</div>
+
+          <!-- Nivel 3: Operaciones Especiales G-3 -->
+          <div class="grid-3">
+            <div class="org-node" onclick="showActor('rojas')">
+              <span class="badge badge-judicial">Subdirector DAS</span>
+              <div style="font-weight:700; margin-top:0.3rem;">Emiro Rojas Granados</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Acusado formalmente por la Fiscalía 189 por Crimen de Lesa Humanidad (2017).</div>
+            </div>
+            <div class="org-node" onclick="showActor('ortiz')">
+              <span class="badge badge-probado">Subdirector Operaciones</span>
+              <div style="font-weight:700; margin-top:0.3rem;">Hugo Daney Ortiz García</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Sentencia Anticipada (2014) aceptando Tortura Psicológica Agravada.</div>
+            </div>
+            <div class="org-node" onclick="showActor('duarte')">
+              <span class="badge badge-probado">Coordinador G-3</span>
+              <div style="font-weight:700; margin-top:0.3rem;">Fabio Duarte Traslaviña</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Sentencia Anticipada (2010). Reconoció seguimientos y carpetas AZ.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECCIÓN 8: MATRIZ Y CALCULADORA DPI ==================== -->
+      <section class="section-view" id="sec-8">
+        <div class="sec-top">
+          <div class="sec-tag">Capítulo 08 · Subsunción Jurídica Rigurosa</div>
+          <h2 class="sec-headline">Matriz Analítica y Calculadora de Tipicidad DPI</h2>
+          <p class="sec-sub">Evaluación metodológica de los elementos del Art. 7(1)(h) frente al acervo probatorio del caso.</p>
+        </div>
+
+        <!-- Calculadora de Tipicidad DPI -->
+        <div class="card" style="margin-bottom:1.5rem; border-color:var(--border-accent);">
+          <div class="card-title">🧮 Calculadora Interactiva de Compatibilidad con el Estatuto de Roma</div>
+          <p class="card-p" style="font-size:0.85rem; margin-bottom:1rem;">
+            Activa o desactiva cada elemento acreditado en el expediente para calcular el índice de compatibilidad jurídica con el crimen de lesa humanidad de persecución:
+          </p>
+          <div class="grid-3" style="margin-bottom:1rem;">
+            <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.82rem; cursor:pointer;">
+              <input type="checkbox" id="calc-chapeau" checked onchange="updateCalc()" style="accent-color:var(--cyan);" />
+              <span>Ataque Sistemático Comprobado</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.82rem; cursor:pointer;">
+              <input type="checkbox" id="calc-civil" checked onchange="updateCalc()" style="accent-color:var(--cyan);" />
+              <span>Víctima Colectiva / Población Civil</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.82rem; cursor:pointer;">
+              <input type="checkbox" id="calc-motivo" checked onchange="updateCalc()" style="accent-color:var(--cyan);" />
+              <span>Motivo Discriminatorio Político</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.82rem; cursor:pointer;">
+              <input type="checkbox" id="calc-conexion" checked onchange="updateCalc()" style="accent-color:var(--cyan);" />
+              <span>Conexión con Tortura (Art. 7.1.f)</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.82rem; cursor:pointer;">
+              <input type="checkbox" id="calc-estado" checked onchange="updateCalc()" style="accent-color:var(--cyan);" />
+              <span>Aparato Organizado de Poder (Roxin)</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.82rem; cursor:pointer;">
+              <input type="checkbox" id="calc-gravedad" checked onchange="updateCalc()" style="accent-color:var(--cyan);" />
+              <span>Gravedad Extrema (Perjuicio Vital)</span>
+            </label>
+          </div>
+
+          <div style="background:var(--bg-surface); padding:1rem; border-radius:8px; border:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-dim);">Índice de Subsunción DPI</span>
+              <div id="calc-result" style="font-size:1.3rem; font-weight:700; color:var(--emerald);">100% · Subsunción Plena en Art. 7(1)(h)</div>
+            </div>
+            <div id="calc-desc" style="font-size:0.85rem; color:var(--text-muted); max-width:600px;">
+              Los hechos probados satisfacen integralmente el Chapeau internacional, el motivo discriminatorio político y la cláusula de conexión con tortura psíquica.
+            </div>
+          </div>
+        </div>
+
+        <!-- Matriz de 6 Puntos -->
+        <div class="card">
+          <div class="card-title">📋 Matriz Analítica Oficial de 6 Puntos</div>
+          <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; font-size:0.82rem; margin-top:0.8rem;">
+              <thead>
+                <tr style="border-bottom:1px solid var(--border); text-align:left; color:var(--cyan);">
+                  <th style="padding:0.6rem;">Elemento</th>
+                  <th style="padding:0.6rem;">Fundamento Normativo</th>
+                  <th style="padding:0.6rem;">Hecho Probado</th>
+                  <th style="padding:0.6rem;">Fuente Principal</th>
+                  <th style="padding:0.6rem;">Estado</th>
+                </tr>
+              </thead>
+              <tbody style="color:var(--text-muted);">
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                  <td style="padding:0.6rem; font-weight:600; color:var(--text-main);">1. Privación Grave de DDHH</td>
+                  <td style="padding:0.6rem;">Estatuto de Roma Art. 7.1.h; CADH Arts. 5, 7, 13, 22</td>
+                  <td style="padding:0.6rem;">3 exilios forzados, secuestro, TEPT crónico, aniquilación de intimidad</td>
+                  <td style="padding:0.6rem; font-family:var(--font-mono); color:var(--cyan);">DOC-01 p. 48</td>
+                  <td style="padding:0.6rem;"><span class="badge badge-probado">Acreditado</span></td>
+                </tr>
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                  <td style="padding:0.6rem; font-weight:600; color:var(--text-main);">2. Grupo Identificable</td>
+                  <td style="padding:0.6rem;">Art. 7.1.h; TPIY Kupreskic párr. 621</td>
+                  <td style="padding:0.6rem;">Periodistas de investigación independientes y defensores de DDHH</td>
+                  <td style="padding:0.6rem; font-family:var(--font-mono); color:var(--cyan);">DOC-02 p. 1-4</td>
+                  <td style="padding:0.6rem;"><span class="badge badge-probado">Acreditado</span></td>
+                </tr>
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                  <td style="padding:0.6rem; font-weight:600; color:var(--text-main);">3. Motivo Discriminatorio</td>
+                  <td style="padding:0.6rem;">Art. 7.1.h (motivo político); TPIY Kordic párr. 193</td>
+                  <td style="padding:0.6rem;">Calificada expresamente como 'traficante de DDHH' por sus denuncias</td>
+                  <td style="padding:0.6rem; font-family:var(--font-mono); color:var(--cyan);">DOC-01 p. 7, 44</td>
+                  <td style="padding:0.6rem;"><span class="badge badge-probado">Acreditado</span></td>
+                </tr>
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                  <td style="padding:0.6rem; font-weight:600; color:var(--text-main);">4. Cláusula de Conexión</td>
+                  <td style="padding:0.6rem;">Art. 7.1.h en conexión con 7.1.f (tortura) y 7.1.k (inhumanos)</td>
+                  <td style="padding:0.6rem;">Conexión directa con tortura psicológica agravada confesada en sentencias</td>
+                  <td style="padding:0.6rem; font-family:var(--font-mono); color:var(--cyan);">DOC-01 p. 48-50</td>
+                  <td style="padding:0.6rem;"><span class="badge badge-probado">Acreditado</span></td>
+                </tr>
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                  <td style="padding:0.6rem; font-weight:600; color:var(--text-main);">5. Contexto Chapeau</td>
+                  <td style="padding:0.6rem;">Art. 7.1 Chapeau; TPIR Semanza párr. 326</td>
+                  <td style="padding:0.6rem;">Campaña sistemática ejecutada por el DAS contra más de 100 blancos</td>
+                  <td style="padding:0.6rem; font-family:var(--font-mono); color:var(--cyan);">DOC-02 p. 2-5</td>
+                  <td style="padding:0.6rem;"><span class="badge badge-judicial">En Juicio</span></td>
+                </tr>
+                <tr>
+                  <td style="padding:0.6rem; font-weight:600; color:var(--text-main);">6. Autoría y Cadena de Mando</td>
+                  <td style="padding:0.6rem;">Estatuto de Roma Art. 25 y 28; Dogmática Roxin</td>
+                  <td style="padding:0.6rem;">Transmisión vertical de órdenes en el DAS mediante gastos reservados</td>
+                  <td style="padding:0.6rem; font-family:var(--font-mono); color:var(--cyan);">DOC-01 p. 46; DOC-03</td>
+                  <td style="padding:0.6rem;"><span class="badge badge-judicial">En Debate</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECCIÓN 9: DECISIONES JUDICIALES ==================== -->
+      <section class="section-view" id="sec-9">
+        <div class="sec-top">
+          <div class="sec-tag">Capítulo 09 · Jurisprudencia y Resoluciones</div>
+          <h2 class="sec-headline">Decisiones Judiciales y Comparador de Instancias</h2>
+          <p class="sec-sub">El contraste entre la responsabilidad extracontractual del Estado y las actuaciones penales individuales.</p>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:1.5rem;">
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <div>
+                <span class="badge badge-judicial">Consejo de Estado · Sección Tercera</span>
+                <h3 style="margin-top:0.35rem; font-size:1.1rem;">Sentencia Rad. 66.603 (17 Junio 2022)</h3>
+              </div>
+              <img src="assets/escudo_consejo_estado.png" alt="Consejo de Estado" style="width:38px; height:38px; object-fit:contain;" />
+            </div>
+            <p class="card-p" style="margin-top:0.6rem;">
+              Declara patrimonial y extracontractualmente responsable al <strong>DAS en un 70%</strong> por los perjuicios morales y a la salud causados por tortura psicológica y persecución.
+            </p>
+            <div style="margin-top:0.8rem; background:var(--bg-surface); padding:0.8rem; border-radius:6px; font-size:0.8rem;">
+              <div style="color:var(--emerald); font-weight:700;">✓ Reconocimientos:</div>
+              <div>• 350 SMLMV por perjuicios morales a Claudia Duque</div>
+              <div>• 100 SMLMV por afectación grave a la salud (TEPT crónico)</div>
+              <div>• Indemnización a su hija, madre, hermana y sobrina</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <div>
+                <span class="badge badge-crimson">Fiscalía 189 Especializada</span>
+                <h3 style="margin-top:0.35rem; font-size:1.1rem;">Resolución de Acusación (Octubre 2017)</h3>
+              </div>
+              <span class="badge badge-amber">Imprescriptible</span>
+            </div>
+            <p class="card-p" style="margin-top:0.6rem;">
+              Llama a juicio a Emiro Rojas Granados y Néstor Pachón Bermúdez, y califica expresamente los hechos como <strong>Crimen de Lesa Humanidad</strong> en el marco del Art. 7 del Estatuto de Roma.
+            </p>
+            <div style="margin-top:0.8rem; background:var(--bg-surface); padding:0.8rem; border-radius:6px; font-size:0.8rem;">
+              <div style="color:var(--cyan); font-weight:700;">✓ Efectos Procesales:</div>
+              <div>• Aplicación de Ius Cogens para impedir prescripción de la acción penal</div>
+              <div>• Subsunción formal en CP bajo Tortura Psicológica Agravada (Arts. 178 y 179)</div>
+              <div>• Reconocimiento del ataque sistemático contra la prensa crítica</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Splitter Interactivo de Responsabilidad Estatal -->
+        <div class="card">
+          <div class="card-title">⚖️ La Paradoja de la Caducidad: ¿Por qué sólo el DAS fue Condenado?</div>
+          <div class="grid-3" style="margin-top:0.8rem;">
+            <div style="background:rgba(244,63,94,0.1); border:1px solid rgba(244,63,94,0.3); padding:0.9rem; border-radius:8px;">
+              <strong style="color:var(--crimson);">DAS: 70% Condenado</strong>
+              <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.3rem;">La demanda fue oportuna porque sus actos se prolongaron hasta su disolución en 2011 y no operó el término de caducidad.</p>
+            </div>
+            <div style="background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.3); padding:0.9rem; border-radius:8px;">
+              <strong style="color:var(--amber);">Fiscalía: 0% Exonerada (Caducidad)</strong>
+              <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.3rem;">El Consejo de Estado aplicó el plazo de 2 años desde 2004 por la desviación del caso Garzón, denegando inaplicar caducidad en sede contenciosa.</p>
+            </div>
+            <div style="background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.3); padding:0.9rem; border-radius:8px;">
+              <strong style="color:var(--amber);">MinInterior: 0% Exonerado (Caducidad)</strong>
+              <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.3rem;">El retiro indebido del blindado ocurrió en agosto de 2007; al demandarse en 2012, la acción había caducado formalmente.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECCIÓN 10: LÍMITES Y ARCHIVOS ==================== -->
+      <section class="section-view" id="sec-10">
+        <div class="sec-top">
+          <div class="sec-tag">Capítulo 10 · Destrucción de Evidencia y Vacíos</div>
+          <h2 class="sec-headline">Límites Probatorios y Destrucción Masiva de Archivos</h2>
+          <p class="sec-sub">El borrado intencional del 99.8% de las bases de datos de inteligencia y el análisis estricto de fuentes primarias.</p>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:1.5rem;">
+          <div class="card">
+            <div class="card-title">💾 El 'Agujero Negro' Digital: 54 GB Reducidos a 91 MB</div>
+            <div style="width:100%; height:140px; margin-bottom:0.8rem;" class="img-frame" onclick="openLightbox('assets/doc02_54gb_91mb_crop.png')">
+              <img src="assets/doc02_54gb_91mb_crop.png" alt="54GB vs 91MB Borrado de Archivos DAS" />
+              <div class="img-overlay-btn">🔍 Documento CNMH</div>
+            </div>
+            <p class="card-p">
+              El informe forense del CTI citado por el CNMH constató que mientras en los servidores centrales del DAS se compilaron más de <strong>54.000 Megabytes</strong> de información de inteligencia clandestina, el Archivo General de la Nación sólo recibió <strong>91 Megabytes</strong> (menos del 0.2%). El resto fue triturado y borrado con software militar para garantizar impunidad.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">⚠️ Advertencia Metodológica: El Documento DOC-06</div>
+            <div style="width:100%; height:140px; margin-bottom:0.8rem;" class="img-frame" onclick="openLightbox('assets/doc06_csj_truncado.png')">
+              <img src="assets/doc06_csj_truncado.png" alt="DOC-06 Truncado" />
+              <div class="img-overlay-btn">🔍 Facsímil DOC-06</div>
+            </div>
+            <p class="card-p">
+              El archivo <code>Corte Suprema de Justicia... SP5395-2015.pdf</code> está incompleto (sólo la carátula) y corresponde al <strong>Radicado 43880</strong> (delito de acceso carnal violento), sin relación jurídica ni fáctica con Claudia Julieta Duque ni con el DAS. Un análisis riguroso exige descartar su uso como prueba para evitar afirmaciones espurias.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECCIÓN 11: CONCLUSIONES DPI ==================== -->
+      <section class="section-view" id="sec-11">
+        <div class="sec-top">
+          <div class="sec-tag">Capítulo 11 · Conclusiones y Legado</div>
+          <h2 class="sec-headline">Aportes al Derecho Penal Internacional</h2>
+          <p class="sec-sub">El valor dogmático del caso Claudia Julieta Duque para la protección universal del periodismo de investigación.</p>
+        </div>
+
+        <div class="grid-3" style="margin-bottom:1.5rem;">
+          <div class="card">
+            <div class="card-title">🛡️ La Prensa como Sujeto de Persecución</div>
+            <p class="card-p">
+              Fija un precedente universal: silenciar sistemáticamente a la prensa crítica no es un mero conjunto de amenazas ordinarias, sino un ataque que desarticula el control democrático y califica como <strong>crimen de persecución</strong>.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🧠 Tortura Psicológica como Arma de Lesa Humanidad</div>
+            <p class="card-p">
+              La tortura no requiere cicatrices físicas visibles. La destrucción del bienestar psíquico, la zozobra constante y la inducción de terror mediante amenazas a menores de edad constituyen actos inhumanos graves amparados por el Protocolo de Estambul.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">⏳ Ius Cogens y la Imprescriptibilidad</div>
+            <p class="card-p">
+              La calificación de lesa humanidad adoptada por la Fiscalía y respaldada por el Consejo de Estado impide que las dilaciones procesales de más de 20 años extingan la responsabilidad penal de los máximos determinadores.
+            </p>
+          </div>
+        </div>
+
+        <div class="card" style="border-color:var(--border-accent); background:linear-gradient(135deg, rgba(56,189,248,0.06), rgba(244,63,94,0.06));">
+          <div class="card-title">💬 Palabras de Claudia Julieta Duque ante la Comisión de la Verdad</div>
+          <p style="font-size:1.05rem; font-style:italic; color:var(--text-main); line-height:1.6;">
+            "El DAS no me perseguía por ser Claudia Julieta Duque; me perseguía por lo que mi voz revelaba. Destruir mi mente era destruir las verdades que el Estado colombiano no quería que el país conociera."
+          </p>
+        </div>
+      </section>
+
+      <!-- ==================== SECCIÓN 12: GALERÍA DE FUENTES Y FOTOS ==================== -->
+      <section class="section-view" id="sec-12">
+        <div class="sec-top">
+          <div class="sec-tag">Capítulo 12 · Archivo Documental y Fotográfico</div>
+          <h2 class="sec-headline">Galería Visual de Pruebas y Expedientes</h2>
+          <p class="sec-sub">Explora las fotografías históricas, facsímiles de sentencias y documentos de inteligencia que sustentan la investigación.</p>
+        </div>
+
+        <!-- Filtros de Galería -->
+        <div class="filter-group">
+          <button class="filter-chip active" onclick="filterGallery('all', this)">Todas las Piezas (14)</button>
+          <button class="filter-chip" onclick="filterGallery('victima', this)">Claudia Julieta Duque</button>
+          <button class="filter-chip" onclick="filterGallery('das', this)">El Aparato del DAS</button>
+          <button class="filter-chip" onclick="filterGallery('judicial', this)">Expedientes Judiciales</button>
+          <button class="filter-chip" onclick="filterGallery('internacional', this)">Contexto Internacional</button>
+        </div>
+
+        <div class="grid-3" id="gallery-grid">
+          <!-- Card CPI Logo -->
+          <div class="card gal-item" data-cat="internacional" style="padding:0.8rem;">
+            <div class="img-frame" style="height:170px; background:#070d18; display:flex; align-items:center; justify-content:center;" onclick="openLightbox('assets/icc_cpi_logo.svg')">
+              <img src="assets/icc_cpi_logo.svg" alt="Emblema de la Corte Penal Internacional" style="max-height:130px; width:auto; object-fit:contain; padding:10px;" />
+              <div class="img-overlay-btn">🔍 Ampliar</div>
+            </div>
+            <div style="margin-top:0.6rem;">
+              <span class="badge badge-judicial">Corte Penal Internacional</span>
+              <div style="font-weight:700; font-size:0.88rem; margin-top:0.2rem;">Emblema de la Corte Penal Internacional (CPI / ICC)</div>
+              <div class="img-caption">Sede en La Haya. Marco universal del Estatuto de Roma para juzgar el crimen de persecución (Art. 7).</div>
+            </div>
+          </div>
+
+          <!-- Card 1 -->
+          <div class="card gal-item" data-cat="victima" style="padding:0.8rem;">
+            <div class="img-frame" style="height:170px;" onclick="openLightbox('assets/foto_corte_o_protesta.png')">
+              <img src="assets/foto_corte_o_protesta.png" alt="Claudia Julieta Duque en Audiencia" />
+              <div class="img-overlay-btn">🔍 Ampliar</div>
+            </div>
+            <div style="margin-top:0.6rem;">
+              <span class="badge badge-judicial">Fotografía Principal</span>
+              <div style="font-weight:700; font-size:0.88rem; margin-top:0.2rem;">Claudia Julieta Duque en Audiencia Judicial</div>
+              <div class="img-caption">Registro de litigio por crímenes de lesa humanidad del extinto DAS.</div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="card gal-item" data-cat="das" style="padding:0.8rem;">
+            <div class="img-frame" style="height:170px;" onclick="openLightbox('assets/das_edificio_o_agentes.jpg')">
+              <img src="assets/das_edificio_o_agentes.jpg" alt="Sede Central del DAS" />
+              <div class="img-overlay-btn">🔍 Ampliar</div>
+            </div>
+            <div style="margin-top:0.6rem;">
+              <span class="badge badge-crimson">Aparato de Estado</span>
+              <div style="font-weight:700; font-size:0.88rem; margin-top:0.2rem;">Sede Central del DAS en Paloquemao, Bogotá</div>
+              <div class="img-caption">Centro neurálgico donde operaba clandestinamente el Grupo G-3.</div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card gal-item" data-cat="judicial" style="padding:0.8rem;">
+            <div class="img-frame" style="height:170px;" onclick="openLightbox('assets/doc01_manual_17nov2004_p43.png')">
+              <img src="assets/doc01_manual_17nov2004_p43.png" alt="Manual de Amenaza" />
+              <div class="img-overlay-btn">🔍 Ampliar</div>
+            </div>
+            <div style="margin-top:0.6rem;">
+              <span class="badge badge-crimson">Prueba Reina</span>
+              <div style="font-weight:700; font-size:0.88rem; margin-top:0.2rem;">Manual de Amenazas del 17 de Noviembre de 2004</div>
+              <div class="img-caption">Página 43 de la sentencia del Consejo de Estado transcribiendo el instructivo del DAS.</div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="card gal-item" data-cat="judicial" style="padding:0.8rem;">
+            <div class="img-frame" style="height:170px;" onclick="openLightbox('assets/doc01_sentencia_p1.png')">
+              <img src="assets/doc01_sentencia_p1.png" alt="Sentencia Consejo de Estado" />
+              <div class="img-overlay-btn">🔍 Ampliar</div>
+            </div>
+            <div style="margin-top:0.6rem;">
+              <span class="badge badge-judicial">Fallo 2022</span>
+              <div style="font-weight:700; font-size:0.88rem; margin-top:0.2rem;">Sentencia Rad. 66.603 del Consejo de Estado</div>
+              <div class="img-caption">Página 1: Fallo definitivo condenatorio contra el Departamento Administrativo de Seguridad.</div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="card gal-item" data-cat="judicial" style="padding:0.8rem;">
+            <div class="img-frame" style="height:170px;" onclick="openLightbox('assets/doc01_medicina_legal_p48.png')">
+              <img src="assets/doc01_medicina_legal_p48.png" alt="Protocolo de Estambul Medicina Legal" />
+              <div class="img-overlay-btn">🔍 Ampliar</div>
+            </div>
+            <div style="margin-top:0.6rem;">
+              <span class="badge badge-probado">Prueba Forense</span>
+              <div style="font-weight:700; font-size:0.88rem; margin-top:0.2rem;">Dictamen de Medicina Legal (Protocolo de Estambul)</div>
+              <div class="img-caption">Certificación de Trastorno por Estrés Postraumático Crónico por tortura psicológica.</div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="card gal-item" data-cat="judicial" style="padding:0.8rem;">
+            <div class="img-frame" style="height:170px;" onclick="openLightbox('assets/doc03_lesa_humanidad_2017.png')">
+              <img src="assets/doc03_lesa_humanidad_2017.png" alt="Fiscalía 189 Lesa Humanidad" />
+              <div class="img-overlay-btn">🔍 Ampliar</div>
+            </div>
+            <div style="margin-top:0.6rem;">
+              <span class="badge badge-crimson">Resolución Fiscalía</span>
+              <div style="font-weight:700; font-size:0.88rem; margin-top:0.2rem;">Calificación de Lesa Humanidad (Fiscalía 189)</div>
+              <div class="img-caption">Hito jurídico de octubre de 2017 declarando la imprescriptibilidad de la acción penal.</div>
+            </div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="card gal-item" data-cat="victima" style="padding:0.8rem;">
+            <div class="img-frame" style="height:170px;" onclick="openLightbox('assets/claudia_duque_color.png')">
+              <img src="assets/claudia_duque_color.png" alt="Claudia Julieta Duque Retrato" />
+              <div class="img-overlay-btn">🔍 Ampliar</div>
+            </div>
+            <div style="margin-top:0.6rem;">
+              <span class="badge badge-judicial">Víctima</span>
+              <div style="font-weight:700; font-size:0.88rem; margin-top:0.2rem;">Retrato de Claudia Julieta Duque</div>
+              <div class="img-caption">Periodista sobreviviente a 3 exilios y persecución continuada.</div>
+            </div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="card gal-item" data-cat="das" style="padding:0.8rem;">
+            <div class="img-frame" style="height:170px; background:#111;" onclick="openLightbox('assets/das_logo_oficial.svg')">
+              <img src="assets/das_logo_oficial.svg" alt="Emblema del DAS" style="object-fit:contain; padding:10px;" />
+              <div class="img-overlay-btn">🔍 Ampliar</div>
+            </div>
+            <div style="margin-top:0.6rem;">
+              <span class="badge badge-crimson">Emblema Oficial</span>
+              <div style="font-weight:700; font-size:0.88rem; margin-top:0.2rem;">Escudo del Departamento Administrativo de Seguridad</div>
+              <div class="img-caption">Logotipo del organismo disuelto por Decreto Presidencial 4057 de 2011.</div>
+            </div>
+          </div>
+
+          <!-- Card 9 -->
+          <div class="card gal-item" data-cat="internacional" style="padding:0.8rem;">
+            <div class="img-frame" style="height:170px;" onclick="openLightbox('assets/img_periodistas_silenciados.jpg')">
+              <img src="assets/img_periodistas_silenciados.jpg" alt="Ataques Globales a Periodistas" />
+              <div class="img-overlay-btn">🔍 Ampliar</div>
+            </div>
+            <div style="margin-top:0.6rem;">
+              <span class="badge badge-purple">DPI Universal</span>
+              <div style="font-weight:700; font-size:0.88rem; margin-top:0.2rem;">Periodistas Silenciados en el Mundo</div>
+              <div class="img-caption">El asedio sistemático contra la prensa como agresión contra la sociedad civil.</div>
+            </div>
+          </div>
+
+          <!-- Card 10 -->
+          <div class="card gal-item" data-cat="internacional" style="padding:0.8rem;">
+            <div class="img-frame" style="height:170px;" onclick="openLightbox('assets/img_conflicto_lesa_humanidad.jpg')">
+              <img src="assets/img_conflicto_lesa_humanidad.jpg" alt="Ataques Sistemáticos Civiles" />
+              <div class="img-overlay-btn">🔍 Ampliar</div>
+            </div>
+            <div style="margin-top:0.6rem;">
+              <span class="badge badge-purple">Contexto Chapeau</span>
+              <div style="font-weight:700; font-size:0.88rem; margin-top:0.2rem;">Ataque Sistemático contra Población Civil</div>
+              <div class="img-caption">Referente internacional para la aplicación del Artículo 7 del Estatuto de Roma.</div>
+            </div>
+          </div>
+
+          <!-- Card 11 -->
+          <div class="card gal-item" data-cat="judicial" style="padding:0.8rem;">
+            <div class="img-frame" style="height:170px;" onclick="openLightbox('assets/doc02_cnmh_portada.png')">
+              <img src="assets/doc02_cnmh_portada.png" alt="Informe CNMH" />
+              <div class="img-overlay-btn">🔍 Ampliar</div>
+            </div>
+            <div style="margin-top:0.6rem;">
+              <span class="badge badge-probado">Informe Oficial</span>
+              <div style="font-weight:700; font-size:0.88rem; margin-top:0.2rem;">Informe CNMH: Archivos de Inteligencia DAS</div>
+              <div class="img-caption">Investigación oficial sobre el espionaje, perfiles y borrado de expedientes.</div>
+            </div>
+          </div>
+
+          <!-- Card 12 -->
+          <div class="card gal-item" data-cat="judicial" style="padding:0.8rem;">
+            <div class="img-frame" style="height:170px;" onclick="openLightbox('assets/doc05_omct_2004.png')">
+              <img src="assets/doc05_omct_2004.png" alt="Acción Urgente OMCT 2004" />
+              <div class="img-overlay-btn">🔍 Ampliar</div>
+            </div>
+            <div style="margin-top:0.6rem;">
+              <span class="badge badge-purple">ONG Internacional</span>
+              <div style="font-weight:700; font-size:0.88rem; margin-top:0.2rem;">Acción Urgente OMCT (Ginebra, 2004)</div>
+              <div class="img-caption">Llamado urgente internacional emitido tras la amenaza de quemar a la hija de Claudia.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECCIÓN 13: SIMULADOR DPI (QUIZ INTERACTIVO) ==================== -->
+      <section class="section-view" id="sec-13">
+        <div class="sec-top">
+          <div class="sec-tag">Capítulo 13 · Evaluación Jurídica en Tiempo Real</div>
+          <h2 class="sec-headline">Simulador Jurídico DPI: Caso Duque vs. DAS</h2>
+          <p class="sec-sub">Demuestra tu dominio sobre el crimen de persecución y el Estatuto de Roma respondiendo estas 5 preguntas interactivas.</p>
+        </div>
+
+        <div class="card" style="max-width:850px; margin:0 auto; border-color:var(--border-accent);">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:0.8rem; margin-bottom:1.2rem;">
+            <div>
+              <span class="badge badge-judicial" id="quiz-badge">Pregunta 1 de 5</span>
+              <h3 style="font-size:1.15rem; margin-top:0.3rem;" id="quiz-question">¿Por qué la Fiscalía 189 calificó el caso de Claudia Julieta Duque como Crimen de Lesa Humanidad?</h3>
+            </div>
+            <div style="text-align:right;">
+              <span style="font-size:0.75rem; color:var(--text-dim);">Puntaje</span>
+              <div style="font-family:var(--font-mono); font-size:1.4rem; font-weight:700; color:var(--cyan);" id="quiz-score">0 / 5</div>
+            </div>
+          </div>
+
+          <div id="quiz-options" style="display:flex; flex-direction:column; gap:0.6rem;">
+            <!-- Generated dynamically -->
+          </div>
+
+          <div id="quiz-feedback" style="display:none; margin-top:1.2rem; padding:0.9rem; border-radius:8px; font-size:0.88rem; line-height:1.5;">
+            <!-- Feedback text -->
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; margin-top:1.2rem; border-top:1px solid var(--border); padding-top:0.8rem;">
+            <button class="btn-pill primary" id="quiz-next-btn" style="display:none;" onclick="nextQuestion()">Siguiente Pregunta →</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Modal Lightbox Universal -->
+  <div id="lightbox-modal" onclick="closeLightbox()">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <div class="lightbox-header">
+        <span style="font-size:0.85rem; font-weight:700; color:var(--text-main);" id="lb-title">Visualizador de Documentos y Evidencia</span>
+        <button class="btn-pill" onclick="closeLightbox()">✕ Cerrar</button>
+      </div>
+      <div class="lightbox-img-wrap">
+        <img id="lightbox-img" src="" alt="Ampliación probatoria" />
+      </div>
+      <div class="lightbox-meta" id="lb-desc">
+        Haz clic en la imagen o utiliza Escape para salir.
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Actor Inspector -->
+  <div id="actor-modal" onclick="closeActor()">
+    <div class="actor-box" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem;">
+        <div>
+          <span class="badge badge-crimson" id="act-role">Rol en el Aparato</span>
+          <h3 style="font-family:var(--font-display); font-size:1.35rem; color:var(--text-main); margin-top:0.3rem;" id="act-name">Nombre del Funcionario</h3>
+        </div>
+        <button class="btn-pill" onclick="closeActor()">✕</button>
+      </div>
+      <div style="font-size:0.88rem; color:var(--text-muted); line-height:1.6;" id="act-details">
+        Detalle procesal
+      </div>
+      <div style="margin-top:1.2rem; padding-top:0.8rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:0.75rem; color:var(--text-dim);" id="act-source">Fuente: Expediente Judicial</span>
+        <button class="btn-pill primary" onclick="closeActor()">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    const sectionNames = {
+      1: "01 · Portada y Problema Jurídico",
+      2: "02 · Contexto y Perfil de la Víctima",
+      3: "03 · Cronología Interactiva (1999-2022)",
+      4: "04 · Concepto de Lesa Humanidad (Art. 7)",
+      5: "05 · Crimen de Persecución",
+      6: "06 · Reconstrucción Integral del Asedio",
+      7: "07 · Organigrama DAS & G-3",
+      8: "08 · Matriz y Calculadora DPI",
+      9: "09 · Decisiones Judiciales e Instancias",
+      10: "10 · Límites Probatorios y Archivos",
+      11: "11 · Conclusiones para el DPI",
+      12: "12 · Galería Visual de Pruebas",
+      13: "13 · Simulador Jurídico DPI (Quiz)"
+    };
+
+    const timelineData = {
+      1999: {
+        title: "13 de Agosto de 1999 · Homicidio de Jaime Garzón",
+        badge: "Detonante Fáctico",
+        bclass: "badge-crimson",
+        text: "Jaime Garzón es asesinado en Bogotá. Claudia Julieta Duque inicia su investigación sobre la participación y montaje del DAS para desviar el expediente.",
+        doc: "DOC-01 p. 34; DOC-03 p. 1",
+        img: "assets/doc01_sentencia_p1.png"
+      },
+      2001: {
+        title: "23 de Julio de 2001 · Secuestro ('Paseo Millonario') y 1.er Exilio",
+        badge: "Hecho Acreditado",
+        bclass: "badge-probado",
+        text: "Captores amenazan a Duque advirtiéndole que es por el caso Garzón. Taxis que la vigilaban pertenecían al DAS. Sale al exilio en septiembre de 2001.",
+        doc: "DOC-01 p. 6, 41; DOC-03 p. 1",
+        img: "assets/claudia_duque_color.png"
+      },
+      2003: {
+        title: "Octubre de 2003 · Memorando 'Traficante de Derechos Humanos'",
+        badge: "Documento G-3",
+        bclass: "badge-crimson",
+        text: "El director seccional del DAS Risaralda envía a Jorge Noguera reporte calificando a Duque como 'traficante de DDHH' y anunciando control telefónico.",
+        doc: "DOC-01 p. 7, 44",
+        img: "assets/doc02_cnmh_portada.png"
+      },
+      2004: {
+        title: "17 de Noviembre de 2004 · Manual de Amenaza y Llamada contra su Hija",
+        badge: "Prueba Reina",
+        bclass: "badge-crimson",
+        text: "Instructivo oficial del DAS para amenazar con quemar viva a la niña María Alejandra. A las 7:50 pm se ejecuta la llamada. Acción Urgente OMCT.",
+        doc: "DOC-01 p. 43; DOC-05 p. 1-2",
+        img: "assets/doc01_manual_17nov2004_p43.png"
+      },
+      2006: {
+        title: "2006 · Misión 0904 e Infiltración de Escoltas",
+        badge: "Guerra Psicológica",
+        bclass: "badge-probado",
+        text: "A su regreso del exilio, el DAS ordena labores de inteligencia bajo fachada de estudio de riesgo y utiliza al conductor de su esquema como informante.",
+        doc: "DOC-01 p. 8, 42",
+        img: "assets/claudia_duque_cnmh.png"
+      },
+      2007: {
+        title: "Agosto de 2007 · Retiro Arbitrario del Carro Blindado",
+        badge: "Afectación Estatal",
+        bclass: "badge-crimson",
+        text: "El CRER del MinInterior le retira el esquema blindado alegando mal uso, pese a estar clasificada en 'riesgo extraordinario'. Duque interpone tutela.",
+        doc: "DOC-01 p. 8, 30",
+        img: "assets/doc01_sentencia_p1.png"
+      },
+      2008: {
+        title: "23 de Octubre de 2008 · Sentencia T-1037 de la Corte Constitucional",
+        badge: "Hito Constitucional",
+        bclass: "badge-judicial",
+        text: "La Corte ampara sus derechos, restituye su blindado y ordena al DAS abrir todos sus archivos de inteligencia sobre ella, prohibiendo el secreto sobre abusos.",
+        doc: "DOC-01 p. 30-31; DOC-02 p. 3",
+        img: "assets/doc02_cnmh_portada.png"
+      },
+      2009: {
+        title: "2009 · Hallazgo de AZs del G-3 y Medidas Cautelares CIDH",
+        badge: "Prueba Trasladada",
+        bclass: "badge-probado",
+        text: "El CTI incauta las carpetas AZ. En octubre 6 sujetos asaltan su edificio. El 23 de noviembre la CIDH le otorga medidas cautelares de urgencia.",
+        doc: "DOC-01 p. 38, 43; DOC-04 p. 7",
+        img: "assets/doc05_omct_2004.png"
+      },
+      2010: {
+        title: "Noviembre de 2010 · Confesión de Fabio Duarte (G-3)",
+        badge: "Sentencia Anticipada",
+        bclass: "badge-probado",
+        text: "Duarte Traslaviña acepta cargos por concierto para delinquir y chuzadas. La PGN destituye a Jorge Noguera y Hurtado descartando la obediencia debida.",
+        doc: "DOC-01 p. 46-48",
+        img: "assets/doc01_sentencia_p1.png"
+      },
+      2011: {
+        title: "2011 · Protocolo de Estambul y Disolución del DAS",
+        badge: "Forense y Penal",
+        bclass: "badge-probado",
+        text: "Medicina Legal certifica TEPT crónico. El gobierno liquida el DAS mediante Decreto 4057 de 2011 tras el escándalo de las 'chuzadas'.",
+        doc: "DOC-01 p. 27-28, 48",
+        img: "assets/doc01_medicina_legal_p48.png"
+      },
+      2014: {
+        title: "2014 · Sentencia Anticipada Ortiz García y Borrado de 54 GB",
+        badge: "Tortura Confesada",
+        bclass: "badge-probado",
+        text: "Hugo Daney Ortiz acepta cargos por Tortura Agravada. El CTI constata que el 99.8% de las bases de inteligencia del DAS desaparecieron en el AGN.",
+        doc: "DOC-01 p. 48-50; DOC-02 p. 6",
+        img: "assets/doc02_54gb_91mb_crop.png"
+      },
+      2017: {
+        title: "Octubre de 2017 · Fiscalía Declara Crimen de Lesa Humanidad",
+        badge: "Hito DPI",
+        bclass: "badge-crimson",
+        text: "La Fiscalía 189 Especializada acusa a Emiro Rojas y Pachón Bermúdez y califica la persecución y tortura como crimen de lesa humanidad imprescriptible.",
+        doc: "DOC-03 p. 1-2",
+        img: "assets/doc03_lesa_humanidad_2017.png"
+      },
+      2022: {
+        title: "17 de Junio de 2022 · Condena Definitiva del Consejo de Estado",
+        badge: "Sentencia Firme",
+        bclass: "badge-judicial",
+        text: "Fallo Rad. 66.603: condena al DAS al 70% por graves violaciones a DDHH y tortura psíquica (350 SMLMV morales y 100 SMLMV salud).",
+        doc: "DOC-01 p. 1-3, 68-70",
+        img: "assets/doc01_resuelve_p69.png"
+      }
+    };
+
+    function showSec(num) {
+      document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
+      const target = document.getElementById(`sec-${num}`);
+      if (target) target.classList.add('active');
+
+      document.querySelectorAll('.nav-btn').forEach((b, i) => {
+        b.classList.toggle('active', i + 1 === num);
+      });
+
+      document.getElementById('top-progress-fill').style.width = ((num / 13) * 100) + '%';
+      document.getElementById('bar-title').innerText = sectionNames[num] || `Sección ${num}`;
+
+      if (num === 3) loadYear(1999);
+      if (num === 5) switchPenal('persecucion');
+      if (num === 13 && currentQIndex === 0) renderQuizQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('sidebar').classList.remove('open');
+    }
+
+    function loadYear(yr, btn) {
+      if (btn) {
+        document.querySelectorAll('.scrub-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      const data = timelineData[yr];
+      if (!data) return;
+      const html = `
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1.2rem; flex-wrap:wrap;">
+          <div style="flex:1; min-width:280px;">
+            <span class="badge ${data.bclass}">${data.badge}</span>
+            <h3 style="font-family:var(--font-display); font-size:1.35rem; margin-top:0.35rem; color:var(--text-main);">${data.title}</h3>
+            <p style="font-size:0.9rem; color:var(--text-muted); margin-top:0.4rem; max-width:650px;">${data.text}</p>
+            <div style="font-size:0.78rem; font-family:var(--font-mono); color:var(--cyan); margin-top:0.6rem;">Fuente Primaria: ${data.doc}</div>
+          </div>
+          <div style="width:200px; flex-shrink:0;">
+            <div class="img-frame" onclick="openLightbox('${data.img}')">
+              <img src="${data.img}" alt="${data.title}" style="max-height:130px; object-fit:cover;" />
+              <div class="img-overlay-btn">🔍 Ampliar Facsímil</div>
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById('year-display').innerHTML = html;
+    }
+
+    const penalData = {
+      persecucion: {
+        title: "Crimen de Lesa Humanidad de Persecución (Art. 7.1.h Estatuto de Roma)",
+        text: "Exige la privación intencional y grave de derechos fundamentales con motivo discriminatorio político, en el marco de un ataque generalizado o sistemático y en conexión con otros actos como la tortura. Es un crimen autónomo de Derecho Penal Internacional de naturaleza imprescriptible.",
+        status: "Subsunción doctrinal y resolución de acusación de Fiscalía 189 (2017)."
+      },
+      tortura: {
+        title: "Tortura Psicológica Agravada (Arts. 178 y 179 Código Penal Colombiano)",
+        text: "Infligir a una persona dolores o sufrimientos graves, físicos o psíquicos, con el fin de obtener de ella o de un tercero información o confesión, o de castigarla por un acto cometido, o de intimidarla o coaccionarla. Fue el delito imputado y condenado en las sentencias anticipadas del DAS.",
+        status: "Probado judicialmente en sentencias de Hugo Daney Ortiz y José Miguel Narváez."
+      },
+      amenazas: {
+        title: "Amenazas Comunes (Art. 347 Código Penal Colombiano)",
+        text: "Delito común subsidiario contra la seguridad pública. No exige aparato organizado de poder, ni política de Estado, ni ocasiona una aniquilación continuada de la personalidad. Es insuficiente para captar la gravedad del asedio estatal del DAS.",
+        status: "Descartado como calificación única por la gravedad del contexto sistemático."
+      },
+      desplazamiento: {
+        title: "Desplazamiento Forzado (Art. 180 Código Penal Colombiano)",
+        text: "Obligar a una persona mediante violencia o amenazas a abandonar su lugar de residencia habitual. Claudia Duque sufrió 3 exilios internacionales forzados (2001, 2004 y 2008) directamente atribuibles al terror estatal.",
+        status: "Reconocido fáctica y patrimonialmente por el Consejo de Estado (Rad. 66.603)."
+      }
+    };
+
+    function switchPenal(key, btn) {
+      if (btn) {
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      const item = penalData[key];
+      if (!item) return;
+      document.getElementById('penal-content').innerHTML = `
+        <h4 style="color:var(--cyan); font-size:1.05rem; margin-bottom:0.4rem;">${item.title}</h4>
+        <p style="margin-bottom:0.6rem;">${item.text}</p>
+        <div style="font-size:0.8rem; background:var(--bg-surface); padding:0.5rem 0.8rem; border-radius:6px; border:1px solid var(--border);">
+          <strong style="color:var(--text-main);">Estado Jurídico:</strong> ${item.status}
+        </div>
+      `;
+    }
+
+    const actors = {
+      presidencia: {
+        role: "Máximo Nivel Político",
+        name: "Presidencia de la República (2002–2010)",
+        details: "El DAS era un departamento administrativo que dependía directamente del Despacho Presidencial. Los informes de inteligencia de 'blancos políticos' eran remitidos a altos consejeros presidenciales.",
+        source: "DOC-01 Sentencia Rad. 66.603 p. 44-46"
+      },
+      noguera: {
+        role: "Director General del DAS (2002–2005)",
+        name: "Jorge Aurelio Noguera Cotes",
+        details: "Recibió los memorandos del G-3 donde se calificaba a Claudia Duque como 'traficante de DDHH'. Condenado penalmente por poner el DAS al servicio de las autodefensas (Bloque Norte). Destituido e inhabilitado 20 años por la Procuraduría General.",
+        source: "DOC-01 p. 7, 44; Sanción PGN Sala Disciplinaria"
+      },
+      hurtado: {
+        role: "Directora General del DAS (2007–2008)",
+        name: "María del Pilar Hurtado Afanador",
+        details: "Coordinó las interceptaciones ilegales y la continuidad de las operaciones de desprestigio contra la Corte Suprema y periodistas. Condenada a 14 años de prisión por la Sala de Casación Penal de la Corte Suprema.",
+        source: "Sentencia CSJ Rad. 32380"
+      },
+      narvaez: {
+        role: "Asesor e Ideólogo del DAS",
+        name: "José Miguel Narváez Martínez",
+        details: "Creador intelectual del G-3 y difusor de los manuales de guerra política. Acusado formalmente el 29 de septiembre de 2014 por Tortura Psicológica Agravada contra Claudia Duque. Condenado como determinador del magnicidio de Jaime Garzón.",
+        source: "DOC-01 p. 48-50; Acusación Fiscalía 2014"
+      },
+      rojas: {
+        role: "Subdirector del DAS (2002–2005)",
+        name: "Emiro Rojas Granados",
+        details: "Segundo al mando en la época de mayores agresiones. Acusado formalmente en octubre de 2017 por la Fiscalía 189 Especializada como presunto autor de Crimen de Lesa Humanidad.",
+        source: "DOC-03 Resolución Fiscalía 189 de 2017"
+      },
+      ortiz: {
+        role: "Subdirector de Operaciones",
+        name: "Hugo Daney Ortiz García",
+        details: "Aceptó cargos y se acogió a sentencia anticipada el 29 de julio de 2014, confesando su responsabilidad en la tortura psicológica agravada contra Claudia Julieta Duque.",
+        source: "DOC-01 Sentencia Consejo de Estado p. 48"
+      },
+      duarte: {
+        role: "Coordinador Grupo G-3",
+        name: "Fabio Duarte Traslaviña",
+        details: "Coordinaba el grupo de escenarios del G-3. Confesó en sentencia anticipada (2010) la existencia de las carpetas AZ y las órdenes de vigilancia contra la periodista.",
+        source: "DOC-01 p. 46; Radicado 11-5369"
+      }
+    };
+
+    function showActor(key) {
+      const a = actors[key];
+      if (!a) return;
+      document.getElementById('act-role').innerText = a.role;
+      document.getElementById('act-name').innerText = a.name;
+      document.getElementById('act-details').innerText = a.details;
+      document.getElementById('act-source').innerText = a.source;
+      document.getElementById('actor-modal').classList.add('open');
+    }
+
+    function closeActor() {
+      document.getElementById('actor-modal').classList.remove('open');
+    }
+
+    function toggleChapeau(id, btn) {
+      const chk = document.getElementById(`chk-${id}`);
+      const isOk = chk.innerText === "✓";
+      chk.innerText = isOk ? "✗" : "✓";
+      chk.style.background = isOk ? "rgba(244,63,94,0.3)" : "rgba(52,211,153,0.3)";
+      chk.style.color = isOk ? "var(--crimson)" : "var(--emerald)";
+      
+      const allChecks = [1,2,3,4].map(i => document.getElementById(`chk-${i}`).innerText === "✓");
+      const okCount = allChecks.filter(Boolean).length;
+      const v = document.getElementById('chapeau-verdict');
+      if (okCount === 4) {
+        v.style.background = "rgba(52,211,153,0.15)";
+        v.style.color = "var(--emerald)";
+        v.innerText = "✓ Umbral Superado: Califica como Crimen de Lesa Humanidad (Ius Cogens)";
+      } else {
+        v.style.background = "rgba(244,63,94,0.15)";
+        v.style.color = "var(--crimson)";
+        v.innerText = `⚠️ Umbral Incompleto (${okCount}/4 requisitos): Se degrada a concurso de delitos comunes`;
+      }
+    }
+
+    function updateCalc() {
+      const ids = ['calc-chapeau', 'calc-civil', 'calc-motivo', 'calc-conexion', 'calc-estado', 'calc-gravedad'];
+      const checked = ids.map(id => document.getElementById(id).checked);
+      const count = checked.filter(Boolean).length;
+      const pct = Math.round((count / ids.length) * 100);
+      const res = document.getElementById('calc-result');
+      const desc = document.getElementById('calc-desc');
+      res.innerText = `${pct}% · ${pct === 100 ? 'Subsunción Plena en Art. 7(1)(h)' : pct >= 66 ? 'Subsunción Parcial / Probatoria' : 'Insuficiencia Típica DPI'}`;
+      if (pct === 100) {
+        res.style.color = 'var(--emerald)';
+        desc.innerText = "Los hechos probados satisfacen integralmente el Chapeau internacional, el motivo discriminatorio político y la cláusula de conexión con tortura psíquica.";
+      } else if (pct >= 66) {
+        res.style.color = 'var(--amber)';
+        desc.innerText = "Cumple con elementos medulares pero subsisten vacíos probatorios o discusiones de admisibilidad en sede jurisdiccional.";
+      } else {
+        res.style.color = 'var(--crimson)';
+        desc.innerText = "Sin los elementos estructurales (ataque sistemático o política estatal), las conductas quedan relegadas al derecho penal doméstico ordinario.";
+      }
+    }
+
+    function filterGallery(cat, btn) {
+      if (btn) {
+        btn.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      document.querySelectorAll('.gal-item').forEach(item => {
+        if (cat === 'all' || item.getAttribute('data-cat') === cat) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-modal').classList.add('open');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox-modal').classList.remove('open');
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+    }
+
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    /* Quiz Interactivo */
+    const quizData = [
+      {
+        q: "¿Por qué la Fiscalía 189 calificó las conductas del DAS contra Claudia Julieta Duque como Crimen de Lesa Humanidad en octubre de 2017?",
+        options: [
+          "Porque el Estatuto de Roma es una ley interna obligatoria retroactiva para todos los delitos en Colombia.",
+          "Para aplicar el principio de ius cogens y declarar la imprescriptibilidad de la acción penal ante el ataque sistemático estatal.",
+          "Porque la periodista interpuso una tutela que obligó a cambiar el tipo penal.",
+          "Porque la Corte Penal Internacional emitió una orden de arresto internacional contra los detectives."
+        ],
+        correct: 1,
+        explain: "Correcto. La Fiscalía 189 Especializada acudió a la categoría de lesa humanidad para garantizar que los delitos de tortura agravada y concierto para delinquir no prescribieran, en virtud del Derecho Internacional Consuetudinario (DOC-03)."
+      },
+      {
+        q: "¿Cuál es el requisito del 'Chapeau' del Artículo 7 del Estatuto de Roma que diferencia los crímenes de lesa humanidad de los delitos comunes?",
+        options: [
+          "Que se cometan exclusivamente en medio de una guerra internacional declarada.",
+          "Que formen parte de un ataque generalizado o sistemático contra una población civil y de conformidad con una política de Estado u organizacional.",
+          "Que haya por lo menos 100 víctimas mortales comprobadas en el expediente.",
+          "Que los perpetradores hayan firmado una confesión ante un tribunal militar."
+        ],
+        correct: 1,
+        explain: "Exacto. El Chapeau exige un ataque generalizado o sistemático contra la población civil y el conocimiento de dicho ataque por parte del perpetrador, con arreglo a una política institucional."
+      },
+      {
+        q: "¿Por qué los jueces penales colombianos condenaron por 'Tortura Psicológica Agravada' y no por 'Persecución'?",
+        options: [
+          "Porque los jueces consideraron que no hubo persecución.",
+          "Porque en el Código Penal Colombiano (Ley 599/2000) no existe el delito autónomo de 'persecución', debiendo subsumirse en tortura (Art. 178) y concierto (Art. 340).",
+          "Porque el Estatuto de Roma prohíbe juzgar torturas psicológicas.",
+          "Porque Claudia Julieta Duque retiró los cargos de persecución."
+        ],
+        correct: 1,
+        explain: "Brillante. El ordenamiento penal interno carece del tipo autónomo de persecución de lesa humanidad; por principio de legalidad estricta nacional, se imputó tortura psicológica agravada y concierto para delinquir."
+      },
+      {
+        q: "¿Qué porcentaje de condena administrativa impuso el Consejo de Estado al DAS en su histórica sentencia de 2022 (Rad. 66.603)?",
+        options: [
+          "100% de condena solidaria entre el DAS, la Fiscalía y el Ministerio del Interior.",
+          "70% de responsabilidad exclusiva al DAS, declarando la caducidad frente a la Fiscalía y el Ministerio del Interior.",
+          "50% al DAS y 50% a la periodista por asumir riesgos al investigar.",
+          "0%, el Consejo de Estado absolvió al Estado por prescripción de la acción."
+        ],
+        correct: 1,
+        explain: "Muy bien. El Consejo de Estado condenó al DAS al 70%, pero exoneró a la Fiscalía y al MinInterior al aplicar estrictamente el término de caducidad de 2 años de la acción de reparación directa."
+      },
+      {
+        q: "¿Cuál fue el valor probatorio trascendental del manual telefónico hallado en los discos duros del DAS del 17 de noviembre de 2004?",
+        options: [
+          "Demostró que las amenazas no eran de la delincuencia común, sino un instructivo institucional estructurado por el G-3 para aterrorizar mediante la integridad de su hija.",
+          "Fue descartado como prueba por no tener firma y huella de los detectives.",
+          "Se utilizó únicamente para sancionar una falta disciplinaria menor de horario.",
+          "Comprobó que la niña de 10 años era un blanco militar legítimo."
+        ],
+        correct: 0,
+        explain: "Impecable. El manual manuscrito acreditó que el terror psicológico hacia la niña de 10 años obedecía a un plan deliberado del Estado para quebrar moralmente a la periodista, constituyendo tortura psíquica según el Protocolo de Estambul (DOC-01 p. 43)."
+      }
+    ];
+
+    let currentQIndex = 0;
+    let quizScore = 0;
+
+    function renderQuizQuestion() {
+      const q = quizData[currentQIndex];
+      document.getElementById('quiz-badge').innerText = `Pregunta ${currentQIndex + 1} de ${quizData.length}`;
+      document.getElementById('quiz-question').innerText = q.q;
+      document.getElementById('quiz-score').innerText = `${quizScore} / ${quizData.length}`;
+      document.getElementById('quiz-feedback').style.display = 'none';
+      document.getElementById('quiz-next-btn').style.display = 'none';
+
+      let optsHtml = '';
+      q.options.forEach((opt, idx) => {
+        optsHtml += `
+          <button class="nav-btn" style="border:1px solid var(--border); padding:0.8rem 1rem; text-align:left;" onclick="answerQuiz(${idx}, this)">
+            <span class="nav-num">${String.fromCharCode(65 + idx)}</span>
+            <span>${opt}</span>
+          </button>
+        `;
+      });
+      document.getElementById('quiz-options').innerHTML = optsHtml;
+    }
+
+    function answerQuiz(chosenIdx, btn) {
+      const q = quizData[currentQIndex];
+      const buttons = document.querySelectorAll('#quiz-options button');
+      buttons.forEach(b => b.disabled = true);
+
+      const fb = document.getElementById('quiz-feedback');
+      fb.style.display = 'block';
+
+      if (chosenIdx === q.correct) {
+        quizScore++;
+        btn.style.background = 'rgba(52,211,153,0.2)';
+        btn.style.borderColor = 'var(--emerald)';
+        btn.querySelector('.nav-num').style.background = 'var(--emerald)';
+        btn.querySelector('.nav-num').style.color = '#000';
+        fb.style.background = 'rgba(52,211,153,0.15)';
+        fb.style.borderColor = 'rgba(52,211,153,0.3)';
+        fb.style.color = 'var(--emerald)';
+        fb.innerHTML = `<strong>¡Respuesta Correcta!</strong> ${q.explain}`;
+      } else {
+        btn.style.background = 'rgba(244,63,94,0.2)';
+        btn.style.borderColor = 'var(--crimson)';
+        btn.querySelector('.nav-num').style.background = 'var(--crimson)';
+        btn.querySelector('.nav-num').style.color = '#fff';
+        buttons[q.correct].style.background = 'rgba(52,211,153,0.15)';
+        buttons[q.correct].style.borderColor = 'var(--emerald)';
+        fb.style.background = 'rgba(244,63,94,0.15)';
+        fb.style.borderColor = 'rgba(244,63,94,0.3)';
+        fb.style.color = '#fecdd3';
+        fb.innerHTML = `<strong>Respuesta Incorrecta.</strong> ${q.explain}`;
+      }
+
+      document.getElementById('quiz-score').innerText = `${quizScore} / ${quizData.length}`;
+      document.getElementById('quiz-next-btn').style.display = 'inline-flex';
+      if (currentQIndex === quizData.length - 1) {
+        document.getElementById('quiz-next-btn').innerText = "Ver Resultado Final 🏆";
+      }
+    }
+
+    function nextQuestion() {
+      if (currentQIndex < quizData.length - 1) {
+        currentQIndex++;
+        renderQuizQuestion();
+      } else {
+        // Quiz complete
+        document.getElementById('quiz-badge').innerText = "Evaluación Finalizada";
+        document.getElementById('quiz-question').innerText = `Tu calificación final es de ${quizScore} sobre ${quizData.length} puntos.`;
+        document.getElementById('quiz-options').innerHTML = `
+          <div style="text-align:center; padding:1.5rem 0;">
+            <div style="font-size:3rem; margin-bottom:0.5rem;">${quizScore >= 4 ? '🎓' : '📚'}</div>
+            <p style="color:var(--text-main); font-size:1.1rem; font-weight:700;">
+              ${quizScore === 5 ? '¡Excelente! Dominio absoluto del Derecho Penal Internacional y del Caso Duque.' : quizScore >= 3 ? 'Buen desempeño académico. Repasa los matices procesales entre DPI y Derecho Interno.' : 'Se recomienda repasar las Secciones 4, 8 y 9 antes de la sustentación formal.'}
+            </p>
+            <button class="btn-pill primary" style="margin-top:1rem;" onclick="resetQuiz()">Reiniciar Evaluación ↺</button>
+          </div>
+        `;
+        document.getElementById('quiz-feedback').style.display = 'none';
+        document.getElementById('quiz-next-btn').style.display = 'none';
+      }
+    }
+
+    function resetQuiz() {
+      currentQIndex = 0;
+      quizScore = 0;
+      document.getElementById('quiz-next-btn').innerText = "Siguiente Pregunta →";
+      renderQuizQuestion();
+    }
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      if (document.getElementById('lightbox-modal').classList.contains('open')) {
+        if (e.key === 'Escape') closeLightbox();
+        return;
+      }
+      if (document.getElementById('actor-modal').classList.contains('open')) {
+        if (e.key === 'Escape') closeActor();
+        return;
+      }
+      const activeSec = document.querySelector('.section-view.active');
+      if (!activeSec) return;
+      const currentId = parseInt(activeSec.id.replace('sec-', ''));
+      if (e.key === 'ArrowRight' && currentId < 13) showSec(currentId + 1);
+      if (e.key === 'ArrowLeft' && currentId > 1) showSec(currentId - 1);
+    });
+
+    // Init
+    loadYear(1999);
+    switchPenal('persecucion');
+    renderQuizQuestion();
+  </script>
+</body>
+</html>
